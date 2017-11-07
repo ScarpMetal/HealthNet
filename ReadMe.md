@@ -43,17 +43,16 @@ add a file to overwrite it, this function will remain incomplete.
 ************************************************************************************************
 
 Basic Execution and usage
-At the create user page user will be prompted to fill in a number of basic 
-information fields.
-All fields are required and must be filled in for successful registration.
-The User must enter a unique username and password. 
-The password must be at least 8 characters and cannot be common in nature. 
-System will prompt user for alternate password if it does not meet requirements.  
-The system will also prompt user for alternate username if chosen user name already exists. 
-The registrant is also prompted to enter his/her date of birth and must follow the format
-YYYY-MM-DD if the registrant does not comply, the system will prompt for a valid date. 
-The registrant’s doctor must also be selected in order to register.
-The registrants phone number must be entered with no dashes.
+- At the create user page user will be prompted to fill in a number of basic information fields.
+	- All fields are required and must be filled in for successful registration.
+	- The User must enter a unique username and password. 
+		- The password must be at least 8 characters and cannot be common in nature. 
+		- System will prompt user for alternate password if it does not meet requirements.  
+		- The system will also prompt user for alternate username if chosen user name already exists. 
+	- The registrant is also prompted to enter his/her date of birth and must follow the format
+		- YYYY-MM-DD if the registrant does not comply, the system will prompt for a valid date. 
+	- The registrant’s doctor must also be selected in order to register.
+	- The registrants phone number must be entered with no dashes.
 
 *************************************************************************************************
 
