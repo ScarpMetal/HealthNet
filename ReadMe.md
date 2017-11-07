@@ -58,7 +58,7 @@ The registrants phone number must be entered with no dashes.
 *************************************************************************************************
 
 Create Superuser
-1.s	Open windows command prompt
+1.	Open windows command prompt
 2.	Enter “python manage.py createsuperuser”
 3.	Enter required information(username,email,password)
 4.	Open the web browser and enter http://127.0.0.1:8000/admin
