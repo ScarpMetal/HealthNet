@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>{{ patient.name }}</title>
+    <style type="text/css">
+        h4{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .footer{
+            padding-left: 5px;
+            padding-right: 5px;
+            border: solid #e5e5e5 1px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: center;
+            background-color: #337ab7;
+            color: white;
+        }
+        .footer:hover{
+            background-color: #286090;
+        }
+        .shift{
+            float: right;
+            padding-right: 7px;
+        }
+        .spacer{
+            height: 20px;
+        }
+        .title{
+            padding-left: 5px;
+            padding-right: 5px;
+            border: solid #e5e5e5 1px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+        }
+        .title2{
+            padding-left: 5px;
+            padding-right: 5px;
+            border: solid #e5e5e5 1px;
+            text-align: center;
+        }
+        .vertical_spacer{
+            width: 50px;
+        }
+        .wall{
+            padding-left: 15px;
+            padding-right: 15px;
+            border-left: solid #e5e5e5 1px;
+            border-right: solid #e5e5e5 1px;
+            background-color: #f4f4f4;
+        }
+        .wall:hover{
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/appointments/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="/appointments/">Appointments</a></li>
+            <li><a href="/messages/">Messages</a></li>
+            <li class = "active"><a href="/patients/">Patients</a></li>
+            <li><a href="/">Profile</a></li>
+        </ul>
+        <br>
+        <!--content_begins-->
+        <table>
+            <tr>
+                <td>
+                <table>
+                    <tr>
+                        <td class="shift"><p>Name:</p></td>
+                        <td><p>{{ patient.name }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Date of Birth:</p></td>
+                        <td><p>{{ patient.date_of_birth }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Address:</p></td>
+                        <td><p>{{ patient.address }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Email:</p></td>
+                        <td><p>{{ patient.user.email }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Phone Number:</p></td>
+                        <td><p>{{ formatted_phone_number }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Emergency Contact:</p></td>
+                        <td><p>{{ patient.emg_contact_name }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>EC Phone Number:</p></td>
+                        <td><p>{{ formatted_emg_number }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Insurance Name:</p></td>
+                        <td><p>{{ patient.insurance_name }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Age:</p></td>
+                        <td><p>{{ patient.age }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Sex:</p></td>
+                        <td><p>{{ patient.sex }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Weight:</p></td>
+                        <td><p>{{ patient.weight }}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="shift"><p>Known Allergies:</p></td>
+                        <td><p>{{ patient.known_allergies }}</p></td>
+                    </tr>
+                </table>
+                </td>
+
+                <td class="vertical_spacer"></td>
+
+                <td>
+                <table>
+                    <tr>
+                        <td><div class="title"><h4>Upcoming Appointments</h4></div></td>
+                    </tr>
+                    {% for appt in up_appts %}
+                        <tr>
+                            <td>
+                                <div class="wall">
+                                    <strong>{{ appt.doctor }}</strong> at <strong>{{ appt.time }}</strong> on <strong>{{ appt.date }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr><td><div class="title2"><h4>Previous Appointments</h4></div></td></tr>
+                    {% for appt in prev_appts %}
+                        <tr onclick="window.document.location='{% url "View-patient-appointment" appt.id %}';">
+                            <td>
+                                <div class="wall">
+                                    <strong>{{ appt.doctor }}</strong> at <strong>{{ appt.time }}</strong> on <strong>{{ appt.date }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr onclick="window.document.location='{% url "Appointment-add" patient.id %}';">
+                        <td><div class="footer">Create Appointment</div></td>
+                    </tr>
+
+                    <tr><td class="spacer"></td></tr>
+
+                    <tr>
+                        <td><div class="title"><h4>Prescriptions</h4></div></td>
+                    </tr>
+                    {% for pres in prescriptions %}
+                        <tr onclick="window.document.location='{% url "View-patient-prescription" pres.id %}';">
+                            <td>
+                                <div class="wall">
+                                    <strong>{{ pres.amount }}</strong> <strong>{{ pres.label }}</strong> on <strong>{{ pres.date_prescribed }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr onclick="window.document.location='{% url "Write-patient-prescription" patient.id %}';">
+                        <td><div class="footer">Write Prescription</div></td>
+                    </tr>
+
+                    <td class="spacer"></td>
+
+                    <tr>
+                        <td><div class="title"><h4>Medical Records</h4></div></td>
+                    </tr>
+                    {% for docs in medical_records %}
+                        <tr>
+                            <td>
+                                <div class="wall">{{ docs.label }}</div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr onclick="window.document.location='{% url "Upload-patient-medical-doc" patient.id %}';">
+                        <td><div class="footer">Upload Medical Document</div></td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        </table>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>Medical Documents</title>
+
+    <style type="text/css">
+        td{
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        .table_label{
+            font-weight: bold;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/appointments/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="/appointments/">Appointments</a></li>
+            <li class="active"><a href="">Medical</a></li>
+            <li><a href="/prescriptions/">Prescriptions</a></li>
+            <li><a href="/messages/">Messages</a></li>
+            <li><a href="/">Profile</a></li>
+        </ul>
+        <!--content_begins-->
+        <h3>Medical Documents</h3>
+        <table>
+            <tr>
+                <td class="table_label">Uploaded</td>
+                <td class="table_label">Label</td>
+            </tr>
+            {% for medical_docs in medical %}
+                {% if medical_docs.released %}
+                <tr>
+                    <td>{{ medical_docs.date }}</td>
+                    <td><a href="{{ medical_docs.file.url }}">{{ medical_docs.label }}</a></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+    </div>
+
+</body>
+</html>

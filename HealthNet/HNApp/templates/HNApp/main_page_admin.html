@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>HealthNet - Admin</title>
+    <style type="text/css">
+        td{
+            padding-left: 7px;
+        }
+    </style>
+    <script type="text/javascript">
+    function goToDeletePage() {
+        var page = document.getElementById('delete_page').value;
+        window.location = "/admin/auth/user/" + page + "/delete/";
+    }
+</script>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/">Shortcuts</a></li>
+            <li><a href="/admin/">Admin Panel</a></li>
+        </ul>
+        <!--content_begins-->
+        <table>
+            <h3>Admin Panel Shortcuts</h3>
+            <tr>
+                <td><a class="btn btn-primary btn-sm" href="/admin/HNApp/doctor/add/">Add Doctor</a></td>
+                <td><a class="btn btn-primary btn-sm" href="/admin/HNApp/nurse/add/">Add Nurse</a></td>
+                <td><a class="btn btn-primary btn-sm" href="/stats/">View Statistics</a></td>
+                <td><a class="btn btn-primary btn-sm" href="/activitylog/">View Activity Log</a></td>
+            </tr>
+            <tr>
+                <td style="height:10px"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><input style="width: 40px; text-align: center" type="text" id="delete_page" /></td>
+                <td><input class="btn btn-danger btn-sm" type="submit" value="Delete User (id)" onclick="goToDeletePage()" /></td>
+            </tr>
+        </table>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+    </div>
+</body>

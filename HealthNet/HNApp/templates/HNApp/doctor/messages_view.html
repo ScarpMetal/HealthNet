@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>View Message</title>
+
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/appointments/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="/appointments/">Appointments</a></li>
+            <li class="active"><a href="/messages/">Messages</a></li>
+            <li><a href="/patients/">Patients</a></li>
+            <li><a href="/">Profile</a></li>
+        </ul>
+        <!--content_begins-->
+        <table>
+            <tr>
+                <td style="border-bottom: solid black 1px">
+                    <h3>{{ message.label }}</h3>
+                </td>
+                <td style="border-bottom: solid black 1px">
+
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold">
+                    {{ message.sender }}
+                </td>
+                <td class="date" style="float: right" title="{{ message.date }} at {{ message.time }}">
+                    {% if message.date == today %}
+                            {{ message.time|time:"g:iA"|lower }}
+                        {% else %}
+                            {{ message.month_as_str }} {{ message.date.day }}
+                        {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td style="color: gray">
+                    to {{ message.receiver }}
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 90%">
+                    <br>
+                    {{ message.message }}
+                </td>
+            </tr>
+        </table>
+        <br>
+        <a class="btn btn-primary" href="{% url 'Messages-create' message.id %}">Reply</a>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>HealthNet</title>
+
+    <style type="text/css">
+        td{
+            padding-left: 7px;
+        }
+        .glyphicon{
+            font-size: 17px;
+        }
+        .shift{
+            float: right;
+        }
+        .btn-lg{
+            height: 37px;
+            width: 70px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: medium;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/appointments/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="/appointments/">Appointments</a></li>
+            <li><a href="/messages/">Messages</a></li>
+            <li><a href="/patients/">Patients</a></li>
+            <li class="active"><a href="/">Profile</a></li>
+        </ul>
+        <br>
+        <!--content_begins-->
+        <a class="btn btn-default btn-lg" style="float:right" href="{% url 'Edit-profile' %}">
+            <span class="glyphicon glyphicon-edit"></span> Edit
+        </a>
+
+        <table>
+            <tr>
+                <td class="shift"><p>Name:</p></td>
+                <td><p>{{ request.user.person.name }}</p></td>
+            </tr>
+            <tr>
+                <td class="shift"><p>Date of Birth:</p></td>
+                <td><p>{{ request.user.person.date_of_birth }}</p></td>
+            </tr>
+            <tr>
+		    <td class="shift"><p>Address:</p></td>
+                <td><p>{{ request.user.person.address }}</p></td>
+            </tr>
+            <tr>
+                <td class="shift"><p>Email:</p></td>
+                <td><p>{{ request.user.email }}</p></td>
+            </tr>
+            <tr>
+                <td class="shift"><p>Phone Number:</p></td>
+                <td><p>{{ formatted_phone_number }}</p></td>
+            </tr>
+        </table>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+
+    </div>
+</body>
+</html>

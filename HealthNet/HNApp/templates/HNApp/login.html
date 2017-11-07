@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>Login</title>
+    <style>
+        .login_box{
+            width: 290px;
+            height: 165px;
+
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 5px;
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+
+            margin: auto;
+            padding-left: 10px;
+            padding-top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <img style="padding: 10px" src="http://i.imgur.com/mLr55pP.png">
+    <div class="login_box">
+        <h4>{{ msg }}</h4>
+        <form action={% url 'auth_log' %} method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <table>
+                <tr>
+                    <td><input style="margin-left: 77px" class="btn btn-primary" type="submit" value="Submit" /></td>
+                    <td><a class="btn btn-input" href="{% url 'register' %}">Register</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

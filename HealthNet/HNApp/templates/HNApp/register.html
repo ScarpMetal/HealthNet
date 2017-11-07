@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>Register</title>
+    
+    <style type="text/css">
+        .fieldSpace{
+            padding-bottom: 10px;
+            padding-right: 5px;
+            padding-left: 5px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <a href="/"><img style="padding: 10px" src="http://i.imgur.com/mLr55pP.png"></a>
+    <form action="{% url 'suc_reg' %}" method="post">
+        {% csrf_token %}
+        <table>
+            <h1 style="padding-left: 10px">Registration Form</h1>
+
+            <tr>
+                <td style="border-bottom: solid black 1px"></td>
+                <td style="border-bottom: solid black 1px"></td>
+            </tr>
+            <tr><td style="height: 10px"></td></tr>
+            {% for field in form %}
+                    {% if field.name == "phone_number" %}
+                        <tr>
+                            <td class="fieldSpace"><strong>Phone Number</strong></td>
+                            <td>{{ field }} No spaces or dashes</td>
+                            <td>{{ field.errors }}</td>
+                        </tr>
+                    {% elif field.name == "date_of_birth" %}
+                        <tr>
+                            <td class="fieldSpace"><strong>Date of Birth:</strong></td>
+                            <td>{{ field }}</td>
+                            <td>{{ field.errors }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td class="fieldSpace">{{ field.label_tag }}</td>
+                            <td>{{ field }}</td>
+                            <td>{{ field.errors }}</td>
+                        </tr>
+                    {% endif %}
+            {% endfor %}
+                <tr>
+                    <td></td>
+                    <td><input class="btn btn-primary" type="submit" value="Submit" />
+                    <a class="btn btn-link" href="/accounts/login/">Cancel</a></td>
+                </tr>
+        </table>
+    </form>
+</body>
+</html>

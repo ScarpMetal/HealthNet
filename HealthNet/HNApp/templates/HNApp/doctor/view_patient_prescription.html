@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>View Prescription</title>
+
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/appointments/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="/appointments/">Appointments</a></li>
+            <li><a href="/messages/">Messages</a></li>
+            <li class="active"><a href="/patients/">Patients</a></li>
+            <li><a href="/">Profile</a></li>
+        </ul>
+        <style type="text/css">
+            h3 {
+                margin-top: 5px;
+            }
+        </style>
+        <br>
+        <!--content_begins-->
+        <a href="{% url 'View-patient-profile' pres.patient.id %}"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+        <table>
+            <tr>
+                <td style="border-bottom: solid black 1px">
+                    <h3>{{ pres.label }}</h3>
+                </td>
+
+            </tr>
+            <tr>
+                <td style="font-weight: bold">
+                    Prescribed on {{ pres.date_prescribed }} by Doctor {{ pres.doctor.name }}
+                </td>
+            </tr>
+            <tr>
+                <td style="color: gray">
+                    Quantity: {{ pres.amount }}
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 90%">
+                    <br>
+                    {{ pres.instructions }}
+                </td>
+            </tr>
+        </table>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+    </div>
+
+</body>
+</html>

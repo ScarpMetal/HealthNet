@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/NSzReMF.png">
+    <title>Messages</title>
+
+    <style type="text/css">
+        .heading{
+            /* for if we decide to make the heading text larger */
+        }
+        .read{
+            background-color: #f4f4f4;
+        }
+        .unread{
+            background-color: white;
+            font-weight: bold;
+        }
+        td{
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+        th{
+            padding-left: 18px;
+            padding-right: 18px;
+            background-color: #f4f4f4;
+        }
+        tr{
+            border-top: solid #e5e5e5;
+            border-bottom: solid #e5e5e5;
+            border-width: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/appointments/"><img src="http://i.imgur.com/mLr55pP.png"></a>
+        <br>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a href="/appointments/">Appointments</a></li>
+            <li><a href="/medical/">Medical</a></li>
+            <li><a href="/prescriptions/">Prescriptions</a></li>
+            <li class="active"><a href="">Messages</a></li>
+            <li><a href="/">Profile</a></li>
+        </ul>
+        <!--content_begins-->
+        <br>
+        <table>
+            <tr>
+                <th>
+                    <strong class="heading">From</strong>
+                </th>
+                <th>
+                    <strong class="heading">To</strong>
+                </th>
+                <th>
+                    <strong class="heading">Subject</strong>
+                </th>
+                <th style="text-align: center">
+                    <strong class="heading">Date</strong>
+                </th>
+            </tr>
+
+            <!-- This is the white space between the heading and the messages -->
+            <tr>
+                <td style="height: 5px"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            {% for msg in messages %}
+                <tr class="{% if msg.message_read %} read {% else %} unread {% endif %}"
+                    onclick="window.document.location='{% url "Messages-view" msg.id %}';">
+                    <td>
+                        {{ msg.sender }}
+                    </td>
+                    <td>
+                        {{ msg.receiver }}
+                    </td>
+                    <td>
+                        {{ msg.label }}
+                    </td>
+                    <td style="float: right">
+                        {% if msg.date == today %}
+                            {{ msg.time|time:"g:iA"|lower }}
+                        {% else %}
+                            {{ msg.month_as_str }} {{ msg.date.day }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <a class="btn btn-primary" href="{% url 'Messages-create' %}">Create Message</a>
+        <!--content_ends-->
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-info" href="{% url 'logout' %}" style="float: right">Log Out</a>
+    </div>
+
+</body>
+</html>
